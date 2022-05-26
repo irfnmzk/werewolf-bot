@@ -8,6 +8,8 @@ import (
 
 	"github.com/irfnmzk/werewolf-arena/telegram"
 	"github.com/sirupsen/logrus"
+
+	_ "github.com/joho/godotenv/autoload"
 )
 
 func main() {
@@ -16,6 +18,7 @@ func main() {
 	log.Level = logrus.DebugLevel
 
 	log.Info("Starting application")
+	log.Info("debug starts")
 
 	token := os.Getenv("TELEGRAM_TOKEN")
 	if token == "" {
