@@ -47,5 +47,10 @@ func (tc *Client) Start() {
 func (tc *Client) handleUpdate(update tgapi.Update) {
 	if update.Message.IsCommand() {
 		tc.handleCommand(update.Message)
+		return
+	}
+
+	if update.CallbackQuery != nil {
+		tc.handleCallback(update.CallbackQuery)
 	}
 }

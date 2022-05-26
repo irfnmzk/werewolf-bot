@@ -8,3 +8,7 @@ func (tc *Client) handleCommand(msg *tgbotapi.Message) {
 	tc.log.Debug("data")
 	tc.log.Info(cmd)
 }
+
+func (tc *Client) handleCallback(cb *tgbotapi.CallbackQuery) {
+	tc.log.Debug(cb.Message.Chat.ID)
+}
