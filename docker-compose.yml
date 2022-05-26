@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  werewolf:
+    build: .
+    restart: always
+    ports:
+      - 5555:5000
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
