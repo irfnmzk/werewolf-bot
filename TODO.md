@@ -1,0 +1,4 @@
+- [ ] Implement basic command (/help, /create, /start)
+- [ ] Create minimal Game
+- [ ] Basic functionality (vote, kill, win condition)
+- [ ] Basic Role (villager, werewolf)

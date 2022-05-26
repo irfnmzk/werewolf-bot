@@ -14,11 +14,10 @@ import (
 
 func main() {
 	log := logrus.New()
-	log.Formatter = &logrus.TextFormatter{ForceColors: true}
+	log.Formatter = &logrus.TextFormatter{ForceColors: true, FullTimestamp: true}
 	log.Level = logrus.DebugLevel
 
 	log.Info("Starting application")
-	log.Info("debug starts")
 
 	token := os.Getenv("TELEGRAM_TOKEN")
 	if token == "" {
