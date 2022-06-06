@@ -5,6 +5,7 @@ import (
 
 	tgapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/irfnmzk/werewolf-arena/storage"
+	"github.com/irfnmzk/werewolf-arena/werewolf"
 	"github.com/sirupsen/logrus"
 )
 
@@ -57,6 +58,9 @@ func New(config *ClientConfig, log *logrus.Logger) *Client {
 func (tc *Client) Start() {
 	tc.log.Info("Starting telegram client")
 
+	gameLoop := werewolf.NewGameLoop(tc.redisClient)
+	go gameLoop.Execute()
+
 	// handle update
 	uc := tgapi.NewUpdate(0)
 	uc.Timeout = 30
@@ -64,7 +68,6 @@ func (tc *Client) Start() {
 	for update := range updates {
 		tc.handleUpdate(update)
 	}
-
 	// TODO start webhook
 }
 

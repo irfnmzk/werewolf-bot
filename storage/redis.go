@@ -7,7 +7,7 @@ import (
 	"fmt"
 
 	"github.com/go-redis/redis/v8"
-	"github.com/irfnmzk/werewolf-arena/werewolf"
+	"github.com/irfnmzk/werewolf-arena/state"
 	"github.com/sirupsen/logrus"
 )
 
@@ -20,7 +20,7 @@ type RedisParameters struct {
 }
 
 type RedisInterface struct {
-	client *redis.Client
+	Client *redis.Client
 	logger *logrus.Logger
 }
 
@@ -34,15 +34,15 @@ func (ri *RedisInterface) Init(params interface{}, logger *logrus.Logger) error 
 	})
 
 	ri.logger = logger
-	ri.client = rdb
+	ri.Client = rdb
 
 	return nil
 }
 
-func (ri *RedisInterface) GetGameState(chatId int64) *werewolf.GameState {
+func (ri *RedisInterface) GetGameState(chatId int64) *state.GameState {
 	key := fmt.Sprintf("game:%d", chatId)
 
-	jsonStr, err := ri.client.Get(ctx, key).Result()
+	jsonStr, err := ri.Client.Get(ctx, key).Result()
 	switch {
 	case errors.Is(err, redis.Nil):
 		ri.logger.Info("game for chat id %d is nil", chatId)
@@ -51,7 +51,7 @@ func (ri *RedisInterface) GetGameState(chatId int64) *werewolf.GameState {
 		ri.logger.Error(err)
 		return nil
 	default:
-		dgs := werewolf.GameState{}
+		dgs := state.GameState{}
 		err := json.Unmarshal([]byte(jsonStr), &dgs)
 
 		if err != nil {
@@ -62,7 +62,7 @@ func (ri *RedisInterface) GetGameState(chatId int64) *werewolf.GameState {
 	}
 }
 
-func (ri *RedisInterface) SetGameState(data *werewolf.GameState) {
+func (ri *RedisInterface) SetGameState(data *state.GameState) {
 	key := fmt.Sprintf("game:%d", data.ChatId)
 
 	jBytes, err := json.Marshal(data)
@@ -71,7 +71,7 @@ func (ri *RedisInterface) SetGameState(data *werewolf.GameState) {
 		return
 	}
 
-	err = ri.client.Set(ctx, key, jBytes, 0).Err()
+	err = ri.Client.Set(ctx, key, jBytes, 0).Err()
 	if err != nil {
 		ri.logger.Error(err)
 		return

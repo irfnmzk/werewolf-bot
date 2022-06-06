@@ -1,6 +1,8 @@
 package command
 
-import "github.com/irfnmzk/werewolf-arena/werewolf"
+import (
+	"github.com/irfnmzk/werewolf-arena/state"
+)
 
 func (c *command) StartGame() {
 	isGroup := c.msg.Chat.Type == "group" || c.msg.Chat.Type == "supergroup"
@@ -17,7 +19,7 @@ func (c *command) StartGame() {
 		return
 	}
 
-	gameState = werewolf.NewGameState(c.msg.Chat.ID)
+	gameState = state.NewGameState(c.msg.Chat.ID)
 	c.redis.SetGameState(gameState)
 
 	c.sendMessage("Game berhasil di buat")
