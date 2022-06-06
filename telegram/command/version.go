@@ -1,5 +1,7 @@
 package command
 
+import "os"
+
 func (c *command) Version() {
-	c.sendMessage("Beta")
+	c.sendMessage(os.Getenv("version"))
 }

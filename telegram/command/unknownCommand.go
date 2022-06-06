@@ -1,5 +1,7 @@
 package command
 
+import "github.com/spf13/viper"
+
 func (c *command) UnknownCommand() {
-	c.sendMessage("command tidak ditemukan! silahkan ketik /help untuk melihat daftar command.")
+	c.sendMessage(viper.GetString("common.unknown"))
 }

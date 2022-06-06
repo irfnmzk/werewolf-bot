@@ -1,0 +1,13 @@
+{
+    "common": {
+        "start": "Hai :)",
+        "about": "Aku adalah bot Role Playing Game (RPG) atau game bermain peran. Nanti kalian akan memiliki peran masing - masing dan setiap peran tersebut mempunyai tugas dan tujuan yang berbeda. Tujuan dari game ini adalah bertahan hidup dari serangan Werewolf dan mengalahkan Werewolf.",
+        "help": "help",
+        "join": "Hai! kak %s dan kakak yang lain.\nMakasih udah add aku ke grup, semoga dengan adanya aku bisa membuat grup ini tambah seru dan menyenangkan.\n\nBerikut daftar perintah yang kakak bisa gunakan untuk dapat bermain bersama aku:\n/help - bantuan\n/about - tentang aku\n/version - umur aku\n\nSelamat bermain :)",
+        "left": "Yah kak ko aku di keluarin dari grup, apakah aku ada salah atau kurang menyenangkan kak? Kalo iya, maaf ya kak kedepannya aku janji bakal terus memperbaiki diri dan semoga kakak memberikan aku kesempatan lagi untuk bermain bersama :).",
+        "unknown": "Perintah tidak ditemukan! silahkan ketik /help untuk melihat daftar perintah.",
+        "not_in_group": "Perintah hanya bisa di lakukan dalam group.",
+        "already_created": "Game sudah di buat!",
+        "created": "Game berhasil di buat!"
+    }
+}
