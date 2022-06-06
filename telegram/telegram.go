@@ -1,7 +1,10 @@
 package telegram
 
 import (
+	"os"
+
 	tgapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+	"github.com/irfnmzk/werewolf-arena/storage"
 	"github.com/sirupsen/logrus"
 )
 
@@ -16,15 +19,36 @@ type Client struct {
 
 	log *logrus.Logger
 	bot *tgapi.BotAPI
+
+	redisClient storage.RedisInterface
 }
 
 func New(config *ClientConfig, log *logrus.Logger) *Client {
+	var redisClient storage.RedisInterface
+
+	redisAddr := os.Getenv("REDIS_ADDR")
+	redisPassword := os.Getenv("REDIS_PASS")
+
+	if redisAddr == "" {
+		log.Fatal("no REDIS_ADDR is provided")
+	}
+
+	err := redisClient.Init(storage.RedisParameters{
+		Addr:     redisAddr,
+		Username: "",
+		Password: redisPassword,
+	})
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	bot, err := tgapi.NewBotAPI(config.Token)
 	if err != nil {
 		log.Fatal("cannot connect to telegram")
 	}
 
-	tc := &Client{config, log, bot}
+	tc := &Client{config, log, bot, redisClient}
 	log.Info("Initializing telegram client")
 
 	return tc
