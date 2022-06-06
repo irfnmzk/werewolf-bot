@@ -37,7 +37,7 @@ func New(config *ClientConfig, log *logrus.Logger) *Client {
 		Addr:     redisAddr,
 		Username: "",
 		Password: redisPassword,
-	})
+	}, log)
 
 	if err != nil {
 		log.Fatal(err)
