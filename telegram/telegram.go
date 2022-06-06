@@ -70,6 +70,20 @@ func (tc *Client) Start() {
 
 func (tc *Client) handleUpdate(update tgapi.Update) {
 	if update.Message != nil {
+		if len(update.Message.NewChatMembers) > 0 {
+			for _, item := range update.Message.NewChatMembers {
+				if item.IsBot && item.UserName == "were_wolf_arena_bot" {
+					tc.handleCommand(update.Message, "greeting_join_group_or_channel")
+					return
+				}
+			}
+		}
+
+		if update.Message.LeftChatMember != nil {
+			tc.handleLeftChat(update.Message)
+			return
+		}
+
 		if !update.Message.IsCommand() {
 			tc.handleNonCommand(update.Message)
 			return

@@ -24,6 +24,7 @@ func NewCommand(log *logrus.Logger, bot *tgbotapi.BotAPI, msg *tgbotapi.Message,
 }
 
 type Command interface {
+	GreetingJoinGroupOrChannel()
 	StartGame()
 	UnknownCommand()
 	Help()
