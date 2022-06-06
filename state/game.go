@@ -1,4 +1,4 @@
-package werewolf
+package state
 
 type GameState struct {
 	ChatId int64 `json:"ChatId"`
