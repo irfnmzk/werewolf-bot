@@ -39,7 +39,7 @@ func (ri *RedisInterface) Init(params interface{}, logger *logrus.Logger) error 
 	return nil
 }
 
-func (ri *RedisInterface) GetGameState(chatId int) *werewolf.GameState {
+func (ri *RedisInterface) GetGameState(chatId int64) *werewolf.GameState {
 	key := fmt.Sprintf("game:%d", chatId)
 
 	jsonStr, err := ri.client.Get(ctx, key).Result()

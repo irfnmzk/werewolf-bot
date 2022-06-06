@@ -1,12 +1,12 @@
 package werewolf
 
 type GameState struct {
-	ChatId int `json:"ChatId"`
+	ChatId int64 `json:"ChatId"`
 
 	Running bool `json:"running"`
 }
 
-func NewGameState(chatId int) *GameState {
+func NewGameState(chatId int64) *GameState {
 	return &GameState{
 		ChatId:  chatId,
 		Running: false,

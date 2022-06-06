@@ -8,7 +8,7 @@ import (
 )
 
 func (tc *Client) handleCommand(msg *tgbotapi.Message, text string) {
-	command := command.NewCommand(tc.log, tc.bot, msg)
+	command := command.NewCommand(tc.log, tc.bot, msg, tc.redisClient)
 	switch text {
 	case "start", "mulai":
 		command.StartGame()

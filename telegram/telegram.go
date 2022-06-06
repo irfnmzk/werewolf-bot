@@ -20,7 +20,7 @@ type Client struct {
 	log *logrus.Logger
 	bot *tgapi.BotAPI
 
-	redisClient storage.RedisInterface
+	redisClient *storage.RedisInterface
 }
 
 func New(config *ClientConfig, log *logrus.Logger) *Client {
@@ -48,7 +48,7 @@ func New(config *ClientConfig, log *logrus.Logger) *Client {
 		log.Fatal("cannot connect to telegram")
 	}
 
-	tc := &Client{config, log, bot, redisClient}
+	tc := &Client{config, log, bot, &redisClient}
 	log.Info("Initializing telegram client")
 
 	return tc
