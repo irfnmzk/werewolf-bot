@@ -7,7 +7,10 @@
         "left": "Yah kak ko aku di keluarin dari grup, apakah aku ada salah atau kurang menyenangkan kak? Kalo iya, maaf ya kak kedepannya aku janji bakal terus memperbaiki diri dan semoga kakak memberikan aku kesempatan lagi untuk bermain bersama :).",
         "unknown": "Perintah tidak ditemukan! silahkan ketik /help untuk melihat daftar perintah.",
         "not_in_group": "Perintah hanya bisa di lakukan dalam group.",
-        "already_created": "Game sudah di buat!",
-        "created": "Game berhasil di buat!"
+        "game_not_created_yet": "Game belum dibuat!",
+        "game_already_created": "Game sudah dibuat!",
+        "game_created": "Game berhasil dibuat!",
+        "player_joined": "Pemain berhasil bergabung",
+        "player_already_joined": "Pemain sudah bergabung"
     }
 }

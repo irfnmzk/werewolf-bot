@@ -12,3 +12,15 @@ func NewGameState(chatId int64) *GameState {
 		Running: false,
 	}
 }
+
+type PlayerState struct {
+	ChatId int64 `json:"ChatId"`
+	UserId int64 `json:"UserId"`
+}
+
+func NewPlayerState(chatId int64, userId int64) *PlayerState {
+	return &PlayerState{
+		ChatId: chatId,
+		UserId: userId,
+	}
+}
