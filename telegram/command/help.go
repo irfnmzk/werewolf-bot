@@ -1,6 +1,9 @@
 package command
 
-import tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+import (
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+	"github.com/spf13/viper"
+)
 
 func (c *command) Help() {
 	helpKeyboard := tgbotapi.NewInlineKeyboardMarkup(
@@ -10,5 +13,5 @@ func (c *command) Help() {
 		),
 	)
 
-	c.sendMessageWithMarkup("help :", helpKeyboard)
+	c.sendMessageWithMarkup(viper.GetString("common.help"), helpKeyboard)
 }

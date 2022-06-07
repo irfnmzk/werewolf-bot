@@ -1,5 +1,7 @@
 package command
 
+import "github.com/spf13/viper"
+
 func (c *command) About() {
-	c.sendMessage("about werewolf")
+	c.sendMessage(viper.GetString("common.about"))
 }

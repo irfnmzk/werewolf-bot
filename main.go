@@ -8,6 +8,7 @@ import (
 
 	"github.com/irfnmzk/werewolf-arena/telegram"
 	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 
 	_ "github.com/joho/godotenv/autoload"
 )
@@ -24,6 +25,13 @@ func main() {
 		log.Fatal("no TELEGRAM_TOKEN provided")
 	}
 
+	log.Info("Get messages config")
+
+	err := setupMainConfig(log)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
 	tc := telegram.New(&telegram.ClientConfig{Token: token, Webhook: false, WebhookUrl: ""}, log)
 
 	tc.Start()
@@ -35,4 +43,22 @@ func main() {
 	<-sc
 	log.Info("Stopping service")
 	time.Sleep(time.Second)
+}
+
+// setupMainConfig loads app config to viper
+func setupMainConfig(log *logrus.Logger) (err error) {
+	log.Info("Executing init/config")
+
+	messageConfig := "./config/message.json"
+	if _, err = os.Stat(messageConfig); err != nil {
+		return
+	}
+
+	viper.SetConfigFile(messageConfig)
+	err = viper.ReadInConfig()
+	if err != nil {
+		return
+	}
+
+	return
 }

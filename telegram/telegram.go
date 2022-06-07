@@ -85,7 +85,7 @@ func (tc *Client) handleUpdate(update tgapi.Update) {
 		}
 
 		if !update.Message.IsCommand() {
-			tc.handleNonCommand(update.Message)
+			// tc.handleNonCommand(update.Message)
 			return
 		}
 

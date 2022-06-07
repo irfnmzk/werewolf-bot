@@ -1,6 +1,10 @@
 package command
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/spf13/viper"
+)
 
 func (c *command) GreetingJoinGroupOrChannel() {
 	text := c.buildMessage()
@@ -9,16 +13,6 @@ func (c *command) GreetingJoinGroupOrChannel() {
 
 func (c *command) buildMessage() (text string) {
 	name := fmt.Sprintf("%s %s", c.msg.From.FirstName, c.msg.From.LastName)
-	text = fmt.Sprintf(
-		`Hai! kak %s dan kakak yang lain.
-Makasih udah add aku ke grup, semoga dengan adanya aku bisa membuat grup ini tambah seru dan menyenangkan
-		
-Berikut daftar perintah yang kakak bisa gunakan untuk dapat bermain bersama aku:
-/help - bantuan
-/about - tentang aku
-/version - umur aku
-
-Selamat bermain :)
-		`, name)
+	text = fmt.Sprintf(viper.GetString("common.join"), name)
 	return
 }
