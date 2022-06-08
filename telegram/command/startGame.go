@@ -14,14 +14,13 @@ func (c *command) StartGame() {
 	}
 
 	gameState := c.redis.GetGameState(c.msg.Chat.ID)
-
 	if gameState != nil {
-		c.sendMessage(viper.GetString("common.already_created"))
+		c.sendMessage(viper.GetString("common.game_already_created"))
 		return
 	}
 
 	gameState = werewolf.NewGameState(c.msg.Chat.ID)
 	c.redis.SetGameState(gameState)
 
-	c.sendMessage(viper.GetString("common.created"))
+	c.sendMessage(viper.GetString("common.game_created"))
 }

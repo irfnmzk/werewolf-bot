@@ -22,6 +22,8 @@ func (tc *Client) handleCommand(msg *tgbotapi.Message, text string) {
 		command.Version()
 	case "help":
 		command.Help()
+	case "join":
+		command.JoinInGame()
 	default:
 		command.UnknownCommand()
 	}

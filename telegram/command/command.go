@@ -30,4 +30,5 @@ type Command interface {
 	Help()
 	About()
 	Version()
+	JoinInGame()
 }
