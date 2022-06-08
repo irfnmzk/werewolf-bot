@@ -9,19 +9,19 @@ import (
 	"github.com/irfnmzk/werewolf-arena/werewolf"
 )
 
-func (ri *RedisInterface) GetGameState(chatId int64) *werewolf.GameState {
-	key := fmt.Sprintf("game:%d", chatId)
+func (ri *RedisInterface) GetRoomState(chatId int64) *werewolf.RoomState {
+	key := fmt.Sprintf("room:%d", chatId)
 
 	jsonStr, err := ri.client.Get(ctx, key).Result()
 	switch {
 	case errors.Is(err, redis.Nil):
-		ri.logger.Info(fmt.Sprintf("game for chat id %d is nil", chatId))
+		ri.logger.Info(fmt.Sprintf("an user in a game for room %d is nil", chatId))
 		return nil
 	case err != nil:
 		ri.logger.Error(err)
 		return nil
 	default:
-		dgs := werewolf.GameState{}
+		dgs := werewolf.RoomState{}
 		err := json.Unmarshal([]byte(jsonStr), &dgs)
 
 		if err != nil {
@@ -32,8 +32,8 @@ func (ri *RedisInterface) GetGameState(chatId int64) *werewolf.GameState {
 	}
 }
 
-func (ri *RedisInterface) SetGameState(data *werewolf.GameState) {
-	key := fmt.Sprintf("game:%d", data.ChatId)
+func (ri *RedisInterface) SetRoomState(data *werewolf.RoomState) {
+	key := fmt.Sprintf("room:%d", data.ChatId)
 
 	jBytes, err := json.Marshal(data)
 	if err != nil {

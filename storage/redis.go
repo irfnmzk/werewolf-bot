@@ -34,3 +34,8 @@ func (ri *RedisInterface) Init(params interface{}, logger *logrus.Logger) error 
 
 	return nil
 }
+
+func (ri *RedisInterface) DelState(key string) error {
+	ri.client.Del(ctx, key)
+	return nil
+}

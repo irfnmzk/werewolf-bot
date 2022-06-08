@@ -24,3 +24,15 @@ func NewPlayerState(chatId int64, userId int64) *PlayerState {
 		UserId: userId,
 	}
 }
+
+type RoomState struct {
+	ChatId int64   `json:"ChatId"`
+	UserId []int64 `json:"UserId"`
+}
+
+func NewRoomState(chatId int64, userId []int64) *RoomState {
+	return &RoomState{
+		ChatId: chatId,
+		UserId: userId,
+	}
+}
