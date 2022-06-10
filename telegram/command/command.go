@@ -2,11 +2,15 @@ package command
 
 import (
 	"fmt"
+	"os"
+	"strconv"
+	"time"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/irfnmzk/werewolf-arena/storage"
 	"github.com/irfnmzk/werewolf-arena/werewolf"
 	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 )
 
 type command struct {
@@ -85,4 +89,22 @@ func (c *command) checkAdministratorRoom(roomState *werewolf.RoomState) (isAdmin
 	err = fmt.Errorf("player is not an administrator")
 
 	return
+}
+
+func (c *command) minPlayer() {
+	lobbyTimeOut, _ := time.ParseDuration(os.Getenv("LOBBY_TIMEOUT"))
+	strMinPlayer := os.Getenv("MIN_PLAYER")
+	minPlayer, _ := strconv.Atoi(strMinPlayer)
+
+	strMaxPlayer := os.Getenv("MAX_PLAYER")
+	maxPlayer, _ := strconv.Atoi(strMaxPlayer)
+
+	c.sendMessage(fmt.Sprintf(viper.GetString("common.game_will_start"), int(lobbyTimeOut.Minutes()), minPlayer, maxPlayer))
+}
+
+func (c *command) maxPlayer(currentPlayer int64) {
+	strMaxPlayer := os.Getenv("MAX_PLAYER")
+	maxPlayer, _ := strconv.Atoi(strMaxPlayer)
+
+	c.sendMessage(fmt.Sprintf(viper.GetString("common.current_player_in_game"), currentPlayer, maxPlayer))
 }

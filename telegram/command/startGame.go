@@ -41,4 +41,6 @@ func (c *command) StartGame() {
 	time.AfterFunc(lobbyTimeOut, c.KillGame)
 
 	c.sendMessage(viper.GetString("common.game_created"))
+	c.minPlayer()
+	c.maxPlayer(0)
 }
