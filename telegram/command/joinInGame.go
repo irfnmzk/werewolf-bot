@@ -1,6 +1,8 @@
 package command
 
 import (
+	"fmt"
+
 	"github.com/irfnmzk/werewolf-arena/werewolf"
 	"github.com/spf13/viper"
 )
@@ -21,5 +23,9 @@ func (c *command) JoinInGame() {
 	playerState = werewolf.NewPlayerState(c.msg.Chat.ID, c.msg.From.ID)
 	c.redis.SetPlayerState(playerState)
 
-	c.sendMessage(viper.GetString("common.player_joined"))
+	gameState = werewolf.SetCurrentPlayerState(gameState.ChatId, gameState.CurrentPlayer+1)
+	c.redis.SetGameState(gameState)
+
+	c.sendMessage(fmt.Sprintf(viper.GetString("common.player_joined"), c.msg.From.FirstName, c.msg.From.LastName))
+	c.maxPlayer(gameState.CurrentPlayer)
 }

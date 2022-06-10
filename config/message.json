@@ -10,8 +10,10 @@
         "game_not_created_yet": "Game belum dibuat!",
         "game_already_created": "Game sudah dibuat!",
         "game_created": "Game berhasil dibuat!",
-        "game_is_over": "Game telah berakhir!",
-        "player_joined": "Pemain berhasil bergabung",
+        "game_is_over": "Game berakhir",
+        "game_will_start": "Game akan dimulai dalam waktu %d menit dengan minimal %d pemain dan maksimal %d pemain",
+        "current_player_in_game": "Jumlah pemain saat ini %d/%d",
+        "player_joined": "%s %s berhasil bergabung",
         "player_already_joined": "Pemain sudah bergabung"
     }
 }

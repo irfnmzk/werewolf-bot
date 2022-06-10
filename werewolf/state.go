@@ -3,13 +3,23 @@ package werewolf
 type GameState struct {
 	ChatId int64 `json:"ChatId"`
 
-	Running bool `json:"running"`
+	Running       bool  `json:"Running"`
+	CurrentPlayer int64 `json:"CurrentPlayer"`
 }
 
 func NewGameState(chatId int64) *GameState {
 	return &GameState{
-		ChatId:  chatId,
-		Running: false,
+		ChatId:        chatId,
+		Running:       false,
+		CurrentPlayer: 0,
+	}
+}
+
+func SetCurrentPlayerState(chatId int64, currentPlayer int64) *GameState {
+	return &GameState{
+		ChatId:        chatId,
+		Running:       false,
+		CurrentPlayer: currentPlayer,
 	}
 }
 
