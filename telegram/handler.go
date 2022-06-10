@@ -24,6 +24,8 @@ func (tc *Client) handleCommand(msg *tgbotapi.Message, text string) {
 		command.Help()
 	case "join":
 		command.JoinInGame()
+	case "kill":
+		command.KillGame()
 	default:
 		command.UnknownCommand()
 	}

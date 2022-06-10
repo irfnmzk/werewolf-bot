@@ -15,7 +15,7 @@ func (ri *RedisInterface) GetPlayerState(chatId int64, playerId int64) *werewolf
 	jsonStr, err := ri.client.Get(ctx, key).Result()
 	switch {
 	case errors.Is(err, redis.Nil):
-		ri.logger.Info("player id %d in a game for chat id %d is nil", playerId, chatId)
+		ri.logger.Info(fmt.Sprintf("player id %d in a game for chat id %d is nil", playerId, chatId))
 		return nil
 	case err != nil:
 		ri.logger.Error(err)
@@ -45,5 +45,13 @@ func (ri *RedisInterface) SetPlayerState(data *werewolf.PlayerState) {
 	if err != nil {
 		ri.logger.Error(err)
 		return
+	}
+}
+
+func (ri *RedisInterface) DelPlayerState(key string) {
+	key = fmt.Sprintf("%s:*", key)
+	iter := ri.client.Scan(ctx, 0, key, 0).Iterator()
+	for iter.Next(ctx) {
+		ri.DelState(iter.Val())
 	}
 }

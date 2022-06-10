@@ -10,6 +10,7 @@
         "game_not_created_yet": "Game belum dibuat!",
         "game_already_created": "Game sudah dibuat!",
         "game_created": "Game berhasil dibuat!",
+        "game_is_over": "Game telah berakhir!",
         "player_joined": "Pemain berhasil bergabung",
         "player_already_joined": "Pemain sudah bergabung"
     }
